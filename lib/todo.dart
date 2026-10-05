@@ -14,6 +14,11 @@ class Todo {
     return '$status $id. $title';
     }
 }
- 
+// import 'dart:io';
+// void main(){
+//   stdout.write('что то:');
+//   String? input = stdin.readLineSync();
+//   print('вы ввели: $input');
+// }
 
  
