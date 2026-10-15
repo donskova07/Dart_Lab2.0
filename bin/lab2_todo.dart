@@ -10,9 +10,16 @@
 
 import 'dart:io';
 import 'package:lab2_todo/todo.dart';
+import 'package:ansicolor/ansicolor.dart';
+
+final AnsiPen greenPen = AnsiPen()..green();
+final AnsiPen redPen = AnsiPen()..red();
+final AnsiPen bluePen = AnsiPen()..blue();
+final AnsiPen yellowPen = AnsiPen()..yellow();
+
 void printMenu() {
   print('');
-  print('ToDo список');
+  print(yellowPen(('ToDo список')));
   print('add  - добавить задачу');
   print('list - показать все задачи');
   print('done - отменять выполненной');
@@ -28,11 +35,11 @@ void addTodo(List<Todo> todos) {
   }
   // int newId = todos.isEmpty ? 1 : todos.last.id + 1;
   todos.add(Todo(title: input.trim()));
-  print('задача добавлена!');
+  print(bluePen(('задача добавлена!')));
 }
 void listTodos(List<Todo> todos) {
   if (todos.isEmpty) {
-    print('Список задач пуст');
+    print(blackPen(('Список задач пуст')));
     return;
   }
   print('');
@@ -46,18 +53,18 @@ void completeTodo(List<Todo> todos) {
   if (input == null) return;
   int? id = int.tryParse(input.trim());
   if (id == null) {
-    print('Ошибка: введите число');
+    print(greenPen(('Ошибка: введите число')));
     return;
   }
 
   for (var todo in todos) {
     if (todo.id == id) {
       todo.complete();
-      print('Задача отмечена выполненной!');
+      print(yellowPen(('Задача отмечена выполненной!')));
       return;
     }
   }
-  print('задача с ID $id не найдена');
+  print(pinkPen(('задача с ID $id не найдена')));
 }
 void deleteTodo(List<Todo> todos) {
   stdout.write('ID задачи: ');
@@ -92,8 +99,8 @@ void main() {
       case 'list': listTodos(todos); break;
       case 'done': completeTodo(todos); break;
       case 'delete': deleteTodo (todos); break;
-      case 'exit': print('До свидания!'); return;
-      default: printMenu(); print('Неизвестная команда.');
+      case 'exit': print(orangePen(('До свидания!'))); return;
+      default: printMenu(); print(bluePen(('Неизвестная команда.')));
     }
   }
 }
