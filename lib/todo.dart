@@ -1,17 +1,20 @@
 class Todo {
+  static int _counter = 0;
   int id;
   String title;
   bool isDone;
 
-  Todo({required this.id, required this.title}) : isDone = false;
+  Todo({required this.title}) : id = ++_counter, 
+  isDone = false;
+  
   void complete(){
-    isDone = true;
+    
   }
-
+  String get status => isDone ? 'выполнено' : 'в процессе';
   @override 
   String toString() {
-    String status = isDone ? '[x]' : '[ ]';
-    return '$status $id. $title';
+    String mark = isDone ? '[x]' : '[ ]';
+    return '$mark $id. $title ($status)';
     }
 }
 
